@@ -7,7 +7,7 @@
       return "/api/chat/"+room;
     }
 
-    function updateChat() {
+    function updateChat() { 
       $.get(room(),function(data) {
         $("#chatbox").text(data);
         window.setTimeout(updateChat,1500);
