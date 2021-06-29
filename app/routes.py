@@ -7,7 +7,7 @@ from os import path
 BASE_DIR = path.dirname(path.realpath(__file__))
 
 def areValidateInputs(userIn, msgIn):
-    return userIn and msgIn and userIn.isalnum() and msgIn.isalnum()
+    return userIn and msgIn and not '\n' in userIn and not '\n' in msgIn
 
 @app.route('/')
 @app.route('/<room>')
@@ -37,7 +37,7 @@ def api(room=''):
                 roomFile.write(f'{chatLine}\n')
             session.clear()
         else:
-            session['errors']="<username> and <message> inputs can't be empty and can contain only alphanumeric characters!\n"
+            session['errors']="<username> and <message> inputs can't be empty and can't contain new line!\n"
     if path.exists(filePath):
         with open(filePath, 'r') as file:
             lines = file.readlines()
